@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#080b0d" />
+  <meta name="description" content="AutoForge — build, personalize and preview your dream machine in an interactive 3D car studio." />
+  <title>AutoForge — Build Your Dream Machine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="page-noise" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="AutoForge home">
+      <span class="brand-mark"><span></span><span></span><span></span></span>
+      <span>AUTO<span class="brand-accent">FORGE</span></span>
+    </a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a class="active" href="#studio">Configurator</a>
+      <a href="#features">Features</a>
+      <a href="#about">About</a>
+    </nav>
+    <div class="top-actions">
+      <span class="live-status"><i></i> LIVE STUDIO</span>
+      <button class="button button-outline" id="save-build-top" type="button">Save build <span>↗</span></button>
+    </div>
+    <button class="menu-button" id="menu-button" type="button" aria-label="Open navigation" aria-expanded="false"><span></span><span></span></button>
+  </header>
+
+  <main id="top">
+    <section class="intro" id="studio">
+      <div class="intro-copy">
+        <div class="eyebrow"><span class="eyebrow-line"></span> YOUR VISION. YOUR MACHINE.</div>
+        <h1>MAKE IT <span>YOURS.</span></h1>
+        <p>Every detail is a decision. Build a machine that feels like it was made for you.</p>
+      </div>
+      <div class="intro-meta">
+        <div><strong>01</strong><span>CHOOSE YOUR STYLE</span></div>
+        <div><strong>02</strong><span>MAKE IT PERSONAL</span></div>
+        <div><strong>03</strong><span>OWN THE ROAD</span></div>
+      </div>
+    </section>
+
+    <section class="studio-layout" aria-label="Car customization studio">
+      <aside class="control-panel panel">
+        <div class="panel-heading">
+          <div><span class="section-kicker">CONFIGURATION / 001</span><h2>Build studio</h2></div>
+          <span class="step-count">01 <b>/</b> 05</span>
+        </div>
+
+        <div class="category-tabs" role="tablist" aria-label="Customization categories">
+          <button class="category-tab active" data-tab="paint" role="tab" aria-selected="true" type="button"><span class="tab-icon">◉</span> Paint</button>
+          <button class="category-tab" data-tab="wheels" role="tab" aria-selected="false" type="button"><span class="tab-icon">✥</span> Wheels</button>
+          <button class="category-tab" data-tab="aero" role="tab" aria-selected="false" type="button"><span class="tab-icon">⌁</span> Aero</button>
+          <button class="category-tab" data-tab="lighting" role="tab" aria-selected="false" type="button"><span class="tab-icon">✧</span> Lights</button>
+          <button class="category-tab" data-tab="interior" role="tab" aria-selected="false" type="button"><span class="tab-icon">▣</span> Interior</button>
+        </div>
+
+        <div class="control-content" id="control-content" role="tabpanel" aria-live="polite"></div>
+
+        <div class="panel-footer">
+          <button class="text-button" id="reset-build" type="button"><span>↺</span> Reset configuration</button>
+          <span class="secure-note">● BUILD SAVED LOCALLY</span>
+        </div>
+      </aside>
+
+      <section class="visual-panel" aria-label="Interactive 3D vehicle preview">
+        <div class="visual-topline">
+          <div class="preview-label"><span class="pulse-dot"></span> LIVE 3D PREVIEW <span class="preview-divider">/</span> <span id="view-label">FRONT THREE-QUARTER</span></div>
+          <button class="icon-button" id="fullscreen-button" type="button" title="Fullscreen preview" aria-label="Fullscreen preview">⛶</button>
+        </div>
+        <div class="canvas-wrap" id="canvas-wrap">
+          <canvas id="car-canvas" aria-label="Interactive 3D preview of your customized sports car"></canvas>
+          <div class="canvas-fade"></div>
+          <div class="model-tag"><span class="model-tag-line"></span><span>AF / R-SPEC</span></div>
+          <div class="drag-hint"><span>↔</span> DRAG TO ROTATE</div>
+          <div class="canvas-loader" id="canvas-loader"><span class="loader-ring"></span><small>PREPARING YOUR MACHINE</small></div>
+        </div>
+        <div class="view-controls">
+          <div class="view-presets" aria-label="Camera views">
+            <button class="view-button active" data-view="front" type="button">FRONT 3/4</button>
+            <button class="view-button" data-view="side" type="button">SIDE</button>
+            <button class="view-button" data-view="rear" type="button">REAR 3/4</button>
+          </div>
+          <button class="sound-button" id="drive-button" type="button"><span>▶</span> <b>DRIVE MODE</b></button>
+        </div>
+        <div class="stage-caption"><span>CONCEPT VEHICLE · AF R-SPEC</span><span>INTERACTIVE CONFIGURATOR <b>© 2026</b></span></div>
+      </section>
+
+      <aside class="summary-panel panel">
+        <div class="summary-top">
+          <span class="section-kicker">YOUR CREATION</span>
+          <span class="build-id">BUILD Nº 0001</span>
+        </div>
+        <h2>AF <span>R-SPEC</span></h2>
+        <p class="summary-description">A performance-inspired concept, shaped by you.</p>
+
+        <div class="summary-divider"></div>
+        <div class="summary-list" id="summary-list">
+          <div class="summary-row"><span>Paint</span><strong id="summary-paint">Volt Lime</strong></div>
+          <div class="summary-row"><span>Wheels</span><strong id="summary-wheels">Aero 5-Spoke</strong></div>
+          <div class="summary-row"><span>Aero kit</span><strong id="summary-aero">Street</strong></div>
+          <div class="summary-row"><span>Lighting</span><strong id="summary-lights">LED / White</strong></div>
+          <div class="summary-row"><span>Interior</span><strong id="summary-interior">Graphite</strong></div>
+        </div>
+
+        <div class="summary-divider"></div>
+        <div class="price-block">
+          <span>ESTIMATED BUILD VALUE</span>
+          <div class="price"><small>₹</small><strong id="total-price">18,50,000</strong></div>
+          <small class="price-note">Illustrative concept pricing</small>
+        </div>
+        <button class="button button-primary summary-save" id="save-build" type="button">Save your creation <span>↗</span></button>
+        <button class="button button-ghost" id="share-build" type="button">Copy build details <span>⧉</span></button>
+        <p class="summary-footnote">Your configuration stays in this browser.</p>
+      </aside>
+    </section>
+
+    <section class="feature-strip" id="features">
+      <div class="feature-item"><span class="feature-number">01 /</span><div><h3>BUILT AROUND YOU</h3><p>Make every detail your own.</p></div></div>
+      <div class="feature-item"><span class="feature-number">02 /</span><div><h3>INSTANT FEEDBACK</h3><p>Watch your choices come to life.</p></div></div>
+      <div class="feature-item"><span class="feature-number">03 /</span><div><h3>NO WRONG TURNS</h3><p>Experiment. Reset. Repeat.</p></div></div>
+    </section>
+
+    <section class="closing-section" id="about">
+      <div class="closing-glow"></div>
+      <span class="eyebrow"><span class="eyebrow-line"></span> THE ROAD IS YOURS</span>
+      <h2>DON'T JUST DRIVE.<br /><span>MAKE A STATEMENT.</span></h2>
+      <p>One machine. A thousand possibilities. Start with a vision and forge your own.</p>
+      <a class="button button-primary" href="#studio">Back to the studio <span>↑</span></a>
+    </section>
+  </main>
+
+  <footer class="footer"><a class="brand footer-brand" href="#top"><span class="brand-mark"><span></span><span></span><span></span></span><span>AUTO<span class="brand-accent">FORGE</span></span></a><span>AN INTERACTIVE AUTOMOTIVE CONCEPT</span><span>DESIGNED TO BE DIFFERENT <b>↗</b></span></footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script type="module" src="script.js"></script>
+</body>
+</html>
